@@ -1,20 +1,18 @@
 class SessionsController < ApplicationController
+  def new
+  end
 
   def create
     session[:name] = params[:name]
     if session[:name].blank?
-      redirect_to "/login"
+      redirect_to login_path
     else
-      redirect_to
+      redirect_to root_path
     end
   end
 
   def destroy
-    if session[:name].blank?
-      redirect_to "/login"
-    else
-      session[:name] = nil
-      redirect_to '/login'
-    end
+    session.clear
+    redirect_to login_path
   end
 end
